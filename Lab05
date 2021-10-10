@@ -1,0 +1,18 @@
+#include <stdio.h>
+
+unsigned setbits(unsigned x, int p, int n, unsigned y)
+{
+	int bitsA, bitsC, bitsE, bitsresult;
+
+	bitsA = x & (~0 << (p + 1));
+	bitsC = x & ~(~0 << (p + 1 - n));
+	bitsE = (y & ~(~0 << n)) << (p + 1 - n);
+	bitsresult = bitsA | bitsE | bitsC;
+}
+main()
+{
+	printf("setbits(0X12345678, 7, 8, 0X89ABCDEF) = %X\n", setbits(0X12345678, 7, 8, 0X89ABCDEF));
+	printf("setbits(0X12345678, 15, 16, 0X89ABCDEF) = %X\n", setbits(0X12345678, 15, 16, 0X89ABCDEF));
+	printf("setbits(0X12345678, 15, 8, 0X89ABCDEF) = %X\n", setbits(0X12345678, 15, 8, 0X89ABCDEF));
+	printf("setbits(0X12345678, 9, 10, 0X89ABCDEF) = %X\n", setbits(0X12345678, 9, 10, 0X89ABCDEF));
+}
